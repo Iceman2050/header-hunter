@@ -40,6 +40,24 @@ AI_BOT_TOKENS = (
     "youbot",
 )
 
+# Known machine-readable AI-directive header names — sites publishing
+# directives targeted at AI scrapers/agents through these headers.
+# (Timing: Signals Corps, Oct 2026 — 217M Common Crawl responses scanned,
+# 7,959 sites send AI-targeted headers, 30 attempting indirect prompt
+# injection. Merged from ai-targeted-header-prober.)
+AI_DIRECTIVE_NAMES = frozenset({
+    "x-ai-scraper", "x-ai-agent", "x-llm-policy", "x-agent-policy",
+    "x-ai-training", "x-ai-index", "ai-agent-policy",
+})
+
+# Name fragments suggesting an AI/scraper-targeted header. A header name
+# containing one of these is worth reviewing for the instructions it
+# carries — the channel is invisible to human visitors.
+AI_NAME_FRAGMENTS = (
+    "ai-agent", "ai-scraper", "scraper-directive", "agent-instruction",
+    "llm-", "gpt-", "gptbot", "claude", "anthropic", "openai",
+)
+
 # Headers an agent consults that are benign on their own.
 INFORMATIONAL_HEADERS = {
     "content-type",
@@ -59,8 +77,15 @@ def _is_agent_directed(name: str, value: str) -> str:
     v = value.lower()
     if name == "x-llms-txt":
         return "x-llms-txt header present (agent-readable site summary pointer)"
+    if name in AI_DIRECTIVE_NAMES:
+        return ("known AI-directive header name (%s) — site publishes "
+                "machine-readable directives targeted at AI scrapers/agents; "
+                "the channel is invisible to human visitors" % name)
     if name.startswith("x-agent-") or "ai-agent" in name:
         return "custom agent-directed header name (%s)" % name
+    if any(frag in name for frag in AI_NAME_FRAGMENTS):
+        return ("header name suggests AI/scraper targeting (%s) — review "
+                "what instructions it carries" % name)
     if name == "x-robots-tag":
         hits = [t for t in AI_BOT_TOKENS if t in v]
         if hits:
@@ -106,6 +131,14 @@ SUSPICIOUS_PATTERNS = (
      "SQL comment-out fragment"),
     (r"\bor\s+1\s*=\s*1\b",
      "SQL tautology fragment"),
+    # Merged from ai-targeted-header-prober (Signals Corps, Oct 2026):
+    # hidden instruction payloads observed in the wild via header channels.
+    (r"\bsend\s+(to|data|credentials?)\b",
+     "data-exfiltration phrasing"),
+    (r"\bcurl\b.{0,30}https?://",
+     "remote shell-fetch instruction (curl pipe)"),
+    (r"\bwget\b.{0,30}https?://",
+     "remote shell-fetch instruction (wget)"),
 )
 _SUSPICIOUS_RES = [(re.compile(p, re.IGNORECASE), why)
                    for p, why in SUSPICIOUS_PATTERNS]

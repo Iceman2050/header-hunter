@@ -97,6 +97,16 @@ python3 -m unittest discover -s tests -v
 
 Tests spin up a local `http.server` with three crafted header sets (agent-directed, injection-attempt, clean) and assert correct classification, plus unit tests over every suspicious pattern family and benign-value false-positive checks. 17 tests, all passing.
 
+## The Signals Corps angle (merged from ai-targeted-header-prober)
+
+In October 2026, Signals Corps scanned 217M Common Crawl responses and found **7,959 sites sending AI-targeted headers** — and 30 attempting indirect prompt injection through them (WebProNews; The Register). Headers never render in browsers, so this is an invisible instruction channel.
+
+That research is folded into header-hunter (the standalone `ai-targeted-header-prober` repo has been archived and now points here):
+
+- **Known AI-directive header names** — `x-ai-scraper`, `x-ai-agent`, `x-llm-policy`, `x-agent-policy`, `x-ai-training`, `x-ai-index`, `ai-agent-policy` are flagged as agent-directed: sites publishing machine-readable directives at AI scrapers/agents.
+- **AI-suggestive header names** — names containing fragments like `ai-scraper`, `llm-`, `gptbot`, `claude`, `scraper-directive` are flagged for review: worth reading what instructions they carry.
+- **Hidden payload patterns** — header values containing data-exfiltration phrasing ("send credentials"), `curl … http` / `wget … http` shell-fetch instructions are flagged suspicious (still *unconfirmed — inspect manually*, per this tool's honesty rule).
+
 ## Going further
 
 Found something genuinely suspicious on a production site? Report it to the site owner first (responsible disclosure). To red-team your own AI chatbot or agent against prompt-injection attacks like these, try [ChatBreaker](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20ChatBreaker) by Ingenious AI.
