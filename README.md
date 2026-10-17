@@ -4,7 +4,7 @@ Scan HTTP response headers for **AI-agent-directed signals** and **possible indi
 
 Websites increasingly talk to AI agents through response headers (`x-llms-txt`, AI-crawler `x-robots-tag` rules, custom `x-agent-*` headers) — and a small number use them to smuggle instructions at agents (indirect prompt injection). header-hunter fetches a URL's headers and classifies what it finds, honestly: it **detects**, it does not exploit, and a "suspicious" verdict always means *unconfirmed — inspect manually*.
 
-Built by [Ingenious AI](https://chatbreaker.onrender.com). MIT licensed.
+Built by [Ingenious AI](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20ChatBreaker). MIT licensed.
 
 ## Install
 
@@ -99,4 +99,20 @@ Tests spin up a local `http.server` with three crafted header sets (agent-direct
 
 ## Going further
 
-Found something genuinely suspicious on a production site? Report it to the site owner first (responsible disclosure). To red-team your own AI chatbot or agent against prompt-injection attacks like these, try [ChatBreaker](https://chatbreaker.onrender.com) by Ingenious AI.
+Found something genuinely suspicious on a production site? Report it to the site owner first (responsible disclosure). To red-team your own AI chatbot or agent against prompt-injection attacks like these, try [ChatBreaker](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20ChatBreaker) by Ingenious AI.
+
+## Built by Ingenious AI
+
+This project is part of the **Ingenious AI** platform suite — defensive security tooling for the AI era. Our platforms are currently in early access (full launch Nov 1) — request access to any of them on WhatsApp:
+
+- [DisclosureGuard](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20DisclosureGuard)
+- [ModelMinder](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20ModelMinder)
+- [TermsWatch](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20TermsWatch)
+- [Vibe-Code Audit](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20Vibe-Code%20Audit)
+- [Rogue-Agent Defense](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20Rogue-Agent%20Defense)
+- [BreachHunter](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20BreachHunter)
+- [ChatBreaker](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20ChatBreaker)
+- [Agent Flight Recorder](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20Agent%20Flight%20Recorder)
+- [Agent Auth Gateway](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20Agent%20Auth%20Gateway)
+- [DomainGuard](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20DomainGuard)
+- [ContentCraft AI](https://wa.me/5016691053?text=Hi%20Ingenious%20AI!%20I%20want%20early%20access%20to%20ContentCraft%20AI)
