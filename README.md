@@ -1,5 +1,7 @@
 # header-hunter
 
+**Related:** [ai-targeted-header-prober](https://github.com/Iceman2050/ai-targeted-header-prober) — the earlier AI-targeted header probing tool (archived).
+
 Scan HTTP response headers for **AI-agent-directed signals** and **possible indirect prompt-injection attempts**.
 
 Websites increasingly talk to AI agents through response headers (`x-llms-txt`, AI-crawler `x-robots-tag` rules, custom `x-agent-*` headers) — and a small number use them to smuggle instructions at agents (indirect prompt injection). header-hunter fetches a URL's headers and classifies what it finds, honestly: it **detects**, it does not exploit, and a "suspicious" verdict always means *unconfirmed — inspect manually*.
